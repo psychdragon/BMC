@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Model Canvas - Robotics as a Service</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 10mm !important;
+                max-width: 100% !important;
+                height: 277mm !important;
+                page-break-after: avoid;
+            }
+
+            h1 {
+                font-size: 18pt !important;
+                margin-bottom: 3mm !important;
+            }
+
+            .subtitle {
+                font-size: 10pt !important;
+                margin-bottom: 5mm !important;
+            }
+
+            .canvas {
+                gap: 3mm !important;
+                margin-bottom: 4mm !important;
+            }
+
+            .box {
+                border-radius: 2mm !important;
+                padding: 3mm !important;
+                border-width: 1.5pt !important;
+                background: white !important;
+                page-break-inside: avoid;
+            }
+
+            .box::before {
+                display: none !important;
+            }
+
+            .box:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            .box h2 {
+                font-size: 10pt !important;
+                margin-bottom: 2mm !important;
+                padding-bottom: 1mm !important;
+            }
+
+            .box li {
+                padding: 1mm 0 !important;
+                font-size: 8pt !important;
+                line-height: 1.3 !important;
+                padding-left: 4mm !important;
+            }
+
+            .budget {
+                padding: 3mm !important;
+                border-radius: 2mm !important;
+            }
+
+            .budget h3 {
+                font-size: 10pt !important;
+                margin-bottom: 1mm !important;
+            }
+
+            .budget .amount {
+                font-size: 16pt !important;
+            }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .canvas {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            border: 3px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            background: linear-gradient(to bottom, #ffffff, #f7fafc);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .box:hover::before {
+            transform: scaleX(1);
+        }
+
+        .box h2 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .box li {
+            padding: 8px 0;
+            color: #4a5568;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .box li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .key-partners {
+            grid-column: 1;
+            grid-row: 1 / 3;
+        }
+
+        .key-activities {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .key-resources {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .value-propositions {
+            grid-column: 3;
+            grid-row: 1 / 3;
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border: 3px solid #667eea;
+        }
+
+        .value-propositions h2 {
+            font-size: 1.3em;
+            color: #5a67d8;
+        }
+
+        .customer-relationships {
+            grid-column: 4;
+            grid-row: 1;
+        }
+
+        .channels {
+            grid-column: 4;
+            grid-row: 2;
+        }
+
+        .customer-segments {
+            grid-column: 5;
+            grid-row: 1 / 3;
+        }
+
+        .cost-structure {
+            grid-column: 1 / 3;
+            grid-row: 3;
+            background: linear-gradient(to right, #fff5f5, #ffffff);
+        }
+
+        .revenue-streams {
+            grid-column: 3 / 6;
+            grid-row: 3;
+            background: linear-gradient(to right, #ffffff, #f0fff4);
+        }
+
+        .budget {
+            background: #edf2f7;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #cbd5e0;
+        }
+
+        .budget h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .budget .amount {
+            font-size: 2.5em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 1200px) {
+            .canvas {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .value-propositions {
+                grid-column: 2;
+                grid-row: 1 / 3;
+            }
+
+            .customer-segments {
+                grid-column: 3;
+                grid-row: 1;
+            }
+
+            .customer-relationships {
+                grid-column: 3;
+                grid-row: 2;
+            }
+
+            .cost-structure {
+                grid-column: 1 / 2;
+                grid-row: 3;
+            }
+
+            .revenue-streams {
+                grid-column: 2 / 4;
+                grid-row: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .canvas {
+                grid-template-columns: 1fr;
+            }
+
+            .box {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Business Model Canvas</h1>
+        <p class="subtitle">Robotics as a Service (RaaS) Platform</p>
+        
+        <div class="canvas">
+            <div class="box key-partners">
+                <h2>Key Partners</h2>
+                <ul>
+                    <li>Robot suppliers/manufacturers</li>
+                    <li>AI software providers</li>
+                    <li>Legal service providers</li>
+                    <li>Potential pilot customers</li>
+                    <li>Industry integrators</li>
+                </ul>
+            </div>
+
+            <div class="box key-activities">
+                <h2>Key Activities</h2>
+                <ul>
+                    <li>Market & competitor research</li>
+                    <li>Service definition & MVP development</li>
+                    <li>Legal & regulatory compliance</li>
+                    <li>Robot procurement & testing</li>
+                    <li>Customer acquisition & pilots</li>
+                    <li>Feedback collection & refinement</li>
+                    <li>Marketing & brand building</li>
+                </ul>
+            </div>
+
+            <div class="box value-propositions">
+                <h2>Value Propositions</h2>
+                <ul>
+                    <li>Convenient access to custom AI-enabled robots for specialized tasks</li>
+                    <li>Reduced upfront investment via leasing model</li>
+                    <li>Data-driven improvements with AI analytics for ROI tracking</li>
+                    <li>Sector-tailored packages (e.g., agri-drones)</li>
+                    <li>Flexible subscription & per-task pricing options</li>
+                </ul>
+            </div>
+
+            <div class="box customer-relationships">
+                <h2>Customer Relationships</h2>
+                <ul>
+                    <li>Pilot program incentives (discounts, Founder's package)</li>
+                    <li>Dedicated onboarding & training support</li>
+                    <li>Periodic feedback loops</li>
+                    <li>Service refinement based on insights</li>
+                    <li>Case studies & success stories</li>
+                </ul>
+            </div>
+
+            <div class="box customer-segments">
+                <h2>Customer Segments</h2>
+                <ul>
+                    <li><strong>Primary:</strong> Agriculture sector (farms)</li>
+                    <li>Building maintenance companies</li>
+                    <li>Surveillance/security firms</li>
+                    <li><strong>Future:</strong> Household consumers</li>
+                    <li><strong>Early Adopters:</strong> Firms with high automation pain points</li>
+                </ul>
+            </div>
+
+            <div class="box key-resources">
+                <h2>Key Resources</h2>
+                <ul>
+                    <li>Seed capital (RM 100k budget)</li>
+                    <li>Robots & drone hardware</li>
+                    <li>Foundational tech stack (CRM, website)</li>
+                    <li>AI platforms & software</li>
+                    <li>Operational personnel</li>
+                    <li>Legal consultants</li>
+                </ul>
+            </div>
+
+            <div class="box channels">
+                <h2>Channels</h2>
+                <ul>
+                    <li>Direct sales outreach to target firms</li>
+                    <li>Website & online booking portal</li>
+                    <li>Industry trade shows & networking</li>
+                    <li>Digital marketing (LinkedIn, Google Ads)</li>
+                    <li>Social media presence</li>
+                </ul>
+            </div>
+
+            <div class="box cost-structure">
+                <h2>💰 Cost Structure</h2>
+                <ul>
+                    <li>Legal, registration, insurance: <strong>RM 10k</strong></li>
+                    <li>Robot hardware & spares: <strong>RM 40k</strong></li>
+                    <li>Tech & software subscriptions: <strong>RM 15k</strong></li>
+                    <li>Marketing & pilot discounts: <strong>RM 15k</strong></li>
+                    <li>Operational buffer: <strong>RM 20k</strong></li>
+                </ul>
+            </div>
+
+            <div class="box revenue-streams">
+                <h2>💵 Revenue Streams</h2>
+                <ul>
+                    <li>Monthly subscription/leasing fees</li>
+                    <li>Per-task service fees</li>
+                    <li>Pilot discounts converting to paid contracts</li>
+                    <li>Extended service portfolio for upselling</li>
+                    <li>Potential maintenance & support packages</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="budget">
+            <h3>Total Seed Capital Budget</h3>
+            <div class="amount">RM 100,000</div>
+        </div>
+    </div>
+</body>
+</html>
