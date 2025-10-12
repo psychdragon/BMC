@@ -18,5 +18,6 @@
 
         <p><a href="index.php">Back to Main Menu</a></p>
     </div>
+    <script src="js/generator.js"></script>
 </body>
 </html>
