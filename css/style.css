@@ -478,48 +478,48 @@ h1 {
     }
 
     #canvasToExport {
-        padding: 5mm; /* MINIMIZE MARGINS: Reduced padding */
+        padding: 4mm; /* More Aggressive Margin Reduction */
         box-sizing: border-box;
     }
 
     .canvas-header {
-        margin-bottom: 5mm; /* MINIMIZE GAP: Add margin to header */
+        margin-bottom: 3mm; /* More Aggressive Gap Reduction */
     }
 
     .canvas-header h1 {
-        font-size: 16pt;
-        margin-bottom: 2mm; /* MINIMIZE GAP: Reduce space after title */
+        font-size: 15pt;
+        margin-bottom: 1.5mm; /* More Aggressive Gap Reduction */
     }
 
     .canvas-header .subtitle {
-        font-size: 11pt;
+        font-size: 10pt;
         color: #718096;
-        margin-bottom: 0; /* MINIMIZE GAP: Remove space after subtitle */
+        margin-bottom: 0;
     }
 
     .canvas {
-        gap: 8px; /* Tighter gap */
+        gap: 6px; /* Tighter gap */
         border: 1px solid #ddd;
-        padding: 8px;
+        padding: 6px;
         page-break-inside: avoid;
     }
 
     .box {
         border: 1px solid #ccc;
-        font-size: 7.5pt; /* Smaller font to fit content */
+        font-size: 7pt; /* Slightly smaller font */
         overflow-wrap: break-word; /* ENSURE TEXT VISIBLE */
         page-break-inside: avoid;
     }
 
     .box h2 {
-        font-size: 9pt;
-        padding: 3px;
+        font-size: 8pt;
+        padding: 2px;
     }
 
     .box ul {
-        padding: 3px 6px;
+        padding: 2px 4px;
     }
      .box li {
-        padding: 2px 0 2px 10px;
+        padding: 1px 0 1px 8px;
     }
 }
