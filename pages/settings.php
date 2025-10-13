@@ -8,7 +8,7 @@
         <button id="saveApiKey">Save Key</button>
         <p id="saveStatus" class="status-message"></p>
     </div>
-    <a href="/" class="back-link">← Back to Main Menu</a>
+    <a href="<?php echo $baseUrl; ?>" class="back-link">← Back to Main Menu</a>
 </div>
 
-<script src="/js/settings.js"></script>
+<script src="<?php echo $baseUrl; ?>js/settings.js"></script>
