@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             margin:       0.5,
             filename:     `${subtitle.textContent.trim().replace(/ /g, '_')}_Business_Model_Canvas.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
+            html2canvas:  { scale: 1 },
             jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
         };
         html2pdf().set(opt).from(element).save();

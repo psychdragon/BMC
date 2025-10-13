@@ -454,3 +454,69 @@ h1 {
         font-size: 1.8em;
     }
 }
+
+/* New, refined print styles for A4 Landscape PDF export */
+@media print {
+    /* A4 landscape dimensions: 297mm x 210mm. Usable area after margins. */
+    /* Let's target approx. 277mm x 190mm */
+    html, body {
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+    }
+
+    .main-nav, .canvas-actions, .canvas-header .subtitle, .back-link {
+        display: none !important; /* Hide all non-canvas elements */
+    }
+
+    .container, .canvas-container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    #canvasToExport {
+        padding: 10mm; /* Standard A4 margins */
+        box-sizing: border-box;
+        width: 297mm;
+        height: 210mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .canvas-header h1 {
+        font-size: 16pt;
+        margin-bottom: 5mm;
+    }
+
+    .canvas {
+        gap: 8px; /* Tighter gap */
+        border: 1px solid #ddd;
+        padding: 8px;
+        height: 170mm; /* Force height to fit */
+    }
+
+    .box {
+        border: 1px solid #ccc;
+        font-size: 7.5pt; /* Smaller font to fit content */
+        overflow-wrap: break-word;
+    }
+
+    .box h2 {
+        font-size: 9pt;
+        padding: 3px;
+    }
+
+    .box ul {
+        padding: 3px 6px;
+    }
+     .box li {
+        padding: 2px 0 2px 10px;
+    }
+}
