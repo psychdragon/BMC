@@ -18,6 +18,10 @@ if ($baseUrl == '' || $baseUrl == '/') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($pageTitle) ? htmlspecialchars($pageTitle) : 'Business Model Canvas Generator'; ?></title>
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>css/style.css">
+    <script>
+        // Pass the base URL from PHP to a global JavaScript variable
+        window.APP_BASE_URL = "<?php echo $baseUrl; ?>";
+    </script>
 </head>
 <body>
     <header class="main-nav">

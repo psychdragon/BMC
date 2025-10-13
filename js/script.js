@@ -135,10 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const loadFile = urlParams.get('load');
 
-    let dataUrl = '/data/canvas-template.json';
+    // Use the base URL provided from PHP to construct the correct path
+    const baseUrl = window.APP_BASE_URL || '/';
+
+    let dataUrl = `${baseUrl}data/canvas-template.json`;
     if (loadFile) {
         if (loadFile.endsWith('.json') && !loadFile.includes('..') && !loadFile.includes('/')) {
-            dataUrl = `/data/${loadFile}`;
+            dataUrl = `${baseUrl}data/${loadFile}`;
             if (subtitle) {
                 const readableName = loadFile.replace('.json', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                 subtitle.textContent = readableName;
