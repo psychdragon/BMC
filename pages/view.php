@@ -16,7 +16,7 @@
                     $canvasName = htmlspecialchars(pathinfo($file, PATHINFO_FILENAME));
                     // Format name for display
                     $displayName = ucwords(str_replace('-', ' ', $canvasName));
-                    echo "<li><a href='/canvas?load={$fileName}'>{$displayName}</a></li>";
+                    echo "<li><a href='{$baseUrl}canvas?load={$fileName}'>{$displayName}</a></li>";
                 }
             } else {
                 echo "<li>No saved canvases found.</li>";
@@ -26,5 +26,5 @@
         }
         ?>
     </ul>
-    <a href="/" class="back-link">← Back to Main Menu</a>
+    <a href="<?php echo $baseUrl; ?>" class="back-link">← Back to Main Menu</a>
 </div>
