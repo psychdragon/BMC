@@ -1,12 +1,26 @@
 <?php
 // index.php router
 
+// Calculate the base path of the application
+$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+
 // Get the requested URL path
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestPath = parse_url($requestUri, PHP_URL_PATH);
 
-// Remove the leading slash and map to a page
-$page = ltrim($requestPath, '/');
+// --- START: FIX for Subdirectory Routing ---
+// Remove the base path from the request path to get the actual page
+if ($basePath != '' && $basePath != '/') {
+    // If the app is in a subdirectory, strip it from the request path
+    $page = substr($requestPath, strlen($basePath));
+} else {
+    // If the app is at the root, the request path is the page
+    $page = $requestPath;
+}
+// Remove the leading slash
+$page = ltrim($page, '/');
+// --- END: FIX for Subdirectory Routing ---
+
 if (empty($page)) {
     $page = 'home';
 }
