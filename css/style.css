@@ -680,4 +680,45 @@ h1 {
     .swot-quadrant li {
         font-size: 9pt;
     }
+
+    /* --- Proposal Print Styles --- */
+    .proposal-actions, .main-nav, .back-link {
+        display: none !important;
+    }
+
+    .proposal-container {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #proposalToExport {
+        padding: 10mm;
+        box-sizing: border-box;
+    }
+
+    .proposal-header h1 {
+        font-size: 22pt;
+        border: none;
+        padding-bottom: 10mm;
+    }
+
+    .proposal-content section {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 8mm;
+        margin-bottom: 8mm;
+        page-break-inside: avoid;
+    }
+
+    .proposal-content section:last-child {
+        border-bottom: none;
+    }
+
+    .proposal-content h2 {
+        font-size: 16pt;
+        border: none;
+    }
 }
