@@ -46,7 +46,7 @@ switch ($pageName) {
         break;
 
     case 'view':
-        $pageTitle = 'View Saved Canvases - Business Model Canvas Generator';
+        $pageTitle = 'View Projects - Business Model Canvas Generator';
         include 'templates/header.php';
         include 'pages/view.php';
         include 'templates/footer.php';

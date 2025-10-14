@@ -30,7 +30,7 @@ if ($baseUrl == '' || $baseUrl == '/') {
         </div>
         <nav class="nav-links">
             <a href="<?php echo $baseUrl; ?>generator">🚀 Generate New Canvas</a>
-            <a href="<?php echo $baseUrl; ?>view">📂 View Saved Canvases</a>
+            <a href="<?php echo $baseUrl; ?>view">📂 View Projects</a>
             <a href="<?php echo $baseUrl; ?>settings">⚙️ Settings</a>
         </nav>
     </header>

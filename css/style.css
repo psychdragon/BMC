@@ -384,6 +384,93 @@ h1 {
     background-color: #f0f2ff;
 }
 
+/* --- New Project List Styles --- */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #f7fafc;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: #a3b3f7;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.project-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.project-card h2 {
+    color: #2d3748;
+    font-size: 1.3em;
+    border: 2px solid transparent; /* Placeholder for focus style */
+    padding: 5px;
+    margin: -5px; /* Offset padding */
+    border-radius: 5px;
+}
+.project-card h2[contenteditable="true"]:focus {
+    background-color: #f0f2ff;
+    border-color: #a3b3f7;
+    outline: none;
+}
+
+.rename-project-btn {
+    background: #e2e8f0;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.rename-project-btn:hover {
+    background: #cbd5e0;
+}
+
+
+.doc-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.doc-link, .generate-link {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.doc-link {
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+.doc-link:hover {
+    background-color: #cbd5e0;
+}
+
+.generate-link {
+    background-color: #c3dafe;
+    color: #2c5282;
+}
+.generate-link:hover {
+    background-color: #a3bffa;
+}
+
+
 /* --- Settings Form Specific --- */
 .settings-form {
     margin-top: 20px;
