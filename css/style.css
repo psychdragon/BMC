@@ -592,6 +592,58 @@ h1 {
     color: #f56565;
 }
 
+/* --- List Item Action Buttons --- */
+.canvas-list li, .box ul, .swot-quadrant ul, .proposal-content ul {
+    position: relative;
+}
+
+.list-actions {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none; /* Hidden by default */
+    gap: 5px;
+}
+
+li:hover .list-actions {
+    display: flex; /* Show on hover */
+}
+
+.list-action-btn {
+    background-color: #e2e8f0;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.list-action-btn:hover {
+    background-color: #cbd5e0;
+}
+.list-action-btn.add-item {
+    background-color: #9ae6b4;
+    color: #276749;
+}
+.list-action-btn.add-item:hover {
+    background-color: #68d391;
+}
+.list-action-btn.remove-item {
+    background-color: #feb2b2;
+    color: #9b2c2c;
+}
+.list-action-btn.remove-item:hover {
+    background-color: #f56565;
+}
+
+
 /* --- Proposal Page Styles --- */
 .proposal-container {
     background: white;

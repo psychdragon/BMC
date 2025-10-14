@@ -34,8 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const ul = document.createElement('ul');
             items.forEach(itemText => {
                 const li = document.createElement('li');
-                li.innerHTML = itemText;
-                li.setAttribute('contenteditable', 'true'); // Make item editable
+                li.innerHTML = itemText; // Use innerHTML to preserve formatting
+                li.setAttribute('contenteditable', 'true');
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'list-actions';
+                actionsDiv.innerHTML = `
+                    <button class="list-action-btn add-item" title="Add item below">+</button>
+                    <button class="list-action-btn remove-item" title="Remove item">-</button>
+                `;
+                li.appendChild(actionsDiv);
                 ul.appendChild(li);
             });
             box.appendChild(ul);
@@ -234,4 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching canvas data:', error);
             canvas.innerHTML = `<p>Error loading Business Model Canvas data from <strong>${dataUrl}</strong>. Please ensure the file exists and is a valid JSON.</p>`;
         });
+
+    // --- Initialize Add/Remove Button Logic ---
+    initializeListActions('.canvas-container');
 });

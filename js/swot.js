@@ -82,7 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 items.forEach(itemText => {
                     const li = document.createElement('li');
                     li.textContent = itemText;
-                    li.setAttribute('contenteditable', 'true'); // Make item editable
+                    li.setAttribute('contenteditable', 'true');
+
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'list-actions';
+                    actionsDiv.innerHTML = `
+                        <button class="list-action-btn add-item" title="Add item below">+</button>
+                        <button class="list-action-btn remove-item" title="Remove item">-</button>
+                    `;
+                    li.appendChild(actionsDiv);
                     quadrant.appendChild(li);
                 });
             }
@@ -149,4 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         swotGrid.innerHTML = '<p>No SWOT analysis file specified.</p>';
         if (subtitle) subtitle.textContent = 'No file loaded';
     }
+
+    // --- Initialize Add/Remove Button Logic ---
+    initializeListActions('.swot-container');
 });

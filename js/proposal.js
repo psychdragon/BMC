@@ -18,15 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             deliverables: Array.from(document.querySelectorAll('#deliverables li')).map(li => li.textContent.trim()),
             timeline: Array.from(document.querySelectorAll('#timeline .phase')).map(phase => ({
-                phase: phase.querySelector('h3').textContent.split(' (')[0],
-                duration: phase.querySelector('h3').textContent.split(' (')[1].replace(')', ''),
+                phase: phase.querySelector('.phase-name').textContent.trim(),
+                duration: phase.querySelector('.phase-duration').textContent.trim(),
                 description: phase.querySelector('p').textContent.trim()
             })),
             budget: {
                 summary: document.querySelector('#budget .budget-summary').textContent.trim(),
                 breakdown: Array.from(document.querySelectorAll('#budget .budget-breakdown li')).map(li => ({
-                    item: li.querySelector('strong').textContent.replace(':', ''),
-                    cost: li.textContent.split(': ')[1]
+                    item: li.querySelector('.item-name').textContent.trim(),
+                    cost: li.querySelector('.item-cost').textContent.trim()
                 }))
             },
             conclusion: document.querySelector('#conclusion p').textContent.trim()
@@ -105,6 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const li = document.createElement('li');
                     li.textContent = item;
                     li.setAttribute('contenteditable', 'true');
+
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'list-actions';
+                    actionsDiv.innerHTML = `
+                        <button class="list-action-btn add-item" title="Add item below">+</button>
+                        <button class="list-action-btn remove-item" title="Remove item">-</button>
+                    `;
+                    li.appendChild(actionsDiv);
                     list.appendChild(li);
                 });
             }
@@ -135,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.timeline.forEach(phase => {
                 const phaseDiv = document.createElement('div');
                 phaseDiv.className = 'phase';
-                phaseDiv.innerHTML = `<h3>${phase.phase} (${phase.duration})</h3><p>${phase.description}</p>`;
+                phaseDiv.innerHTML = `<h3><span class="phase-name" contenteditable="true">${phase.phase}</span> (<span class="phase-duration" contenteditable="true">${phase.duration}</span>)</h3><p contenteditable="true">${phase.description}</p>`;
                 timelineContainer.appendChild(phaseDiv);
             });
         }
@@ -146,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             budgetList.innerHTML = '';
             data.budget.breakdown.forEach(item => {
                 const li = document.createElement('li');
-                li.innerHTML = `<strong>${item.item}:</strong> ${item.cost}`;
+                li.innerHTML = `<strong class="item-name" contenteditable="true">${item.item}</strong>: <span class="item-cost" contenteditable="true">${item.cost}</span>`;
                 budgetList.appendChild(li);
             });
         }
@@ -183,4 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         proposalContent.innerHTML = '<p>No project proposal file specified.</p>';
     }
+
+    // --- Initialize Add/Remove Button Logic ---
+    initializeListActions('.proposal-container');
 });
