@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateSwotAnalysis = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const fileName = urlParams.get('load');
-        const apiKey = localStorage.getItem('deepseek_api_key');
+        const apiKey = localStorage.getItem('deepSeekApiKey');
 
         if (!fileName) {
             alert('Cannot generate SWOT: No file is currently loaded.');
