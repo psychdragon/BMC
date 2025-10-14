@@ -37,7 +37,8 @@
                     $docTypes = [
                         '.json' => 'BMC',
                         '-swot.json' => 'SWOT',
-                        '-proposal.json' => 'Proposal'
+                        '-proposal.json' => 'Proposal',
+                        '-roadmap.json' => 'Roadmap'
                     ];
 
                     foreach ($docTypes as $suffix => $label) {
@@ -52,6 +53,7 @@
                     $bmcFile = $baseName . '.json';
                     $swotFile = $baseName . '-swot.json';
                     $proposalFile = $baseName . '-proposal.json';
+                    $roadmapFile = $baseName . '-roadmap.json';
 
                     echo "<div class='generation-links'>";
                     if (in_array($bmcFile, $projectFiles) && !in_array($swotFile, $projectFiles)) {
@@ -59,7 +61,10 @@
                         echo "<a href='{$baseUrl}canvas?load=" . htmlspecialchars($bmcFile) . "' class='generate-link'>Generate SWOT</a>";
                     }
                     if (in_array($swotFile, $projectFiles) && !in_array($proposalFile, $projectFiles)) {
-                        echo "<a href='#' class='generate-proposal-btn generate-link' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Proposal</a>";
+                        echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='proposal' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Proposal</a>";
+                    }
+                    if (in_array($proposalFile, $projectFiles) && !in_array($roadmapFile, $projectFiles)) {
+                        echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='roadmap' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Roadmap</a>";
                     }
                     echo "</div>"; // .generation-links
 

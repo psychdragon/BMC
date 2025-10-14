@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     projectList.addEventListener('click', function(event) {
         const target = event.target;
 
-        // --- Handle Proposal Generation ---
-        if (target.classList.contains('generate-proposal-btn')) {
+        // --- Handle Document Generation ---
+        if (target.classList.contains('generate-doc-btn')) {
             event.preventDefault();
             const baseFile = target.dataset.file;
-            handleProposalGeneration(baseFile);
+            const docType = target.dataset.docType;
+            handleDocumentGeneration(baseFile, docType);
         }
 
         // --- Handle Project Rename ---
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const handleProposalGeneration = (baseFile) => {
+    const handleDocumentGeneration = (baseFile, docType) => {
         const apiKey = localStorage.getItem('deepSeekApiKey');
 
         if (!apiKey) {
@@ -32,11 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        generationStatus.textContent = `Generating proposal for ${baseFile}...`;
+        generationStatus.textContent = `Generating ${docType} for ${baseFile}...`;
         generationStatus.style.color = 'inherit';
 
         const baseUrl = window.APP_BASE_URL || '/';
-        const apiUrl = `${baseUrl}api/generate_proposal.php`;
+        const apiUrl = `${baseUrl}api/generate_${docType}.php`;
 
         fetch(apiUrl, {
             method: 'POST',
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             if (data.status === 'success') {
-                generationStatus.textContent = 'Proposal generated successfully! Reloading...';
+                generationStatus.textContent = `${docType.charAt(0).toUpperCase() + docType.slice(1)} generated successfully! Reloading...`;
                 generationStatus.style.color = 'green';
                 setTimeout(() => {
                     window.location.reload();
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-            console.error('Proposal Generation error:', error);
+            console.error(`${docType} Generation error:`, error);
             generationStatus.textContent = `Error: ${error.message}`;
             generationStatus.style.color = 'red';
         });

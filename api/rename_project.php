@@ -41,7 +41,7 @@ if (file_exists($dataDir . $safeNewBaseName . '.json')) {
 }
 
 // --- 6. Rename All Associated Files ---
-$docSuffixes = ['.json', '-swot.json', '-proposal.json'];
+$docSuffixes = ['.json', '-swot.json', '-proposal.json', '-roadmap.json'];
 $errors = [];
 $renamedFiles = [];
 

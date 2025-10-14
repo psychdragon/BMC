@@ -26,7 +26,7 @@ if (empty($page)) {
 }
 
 // Whitelist of allowed pages to prevent arbitrary file inclusion
-$allowedPages = ['home', 'generator', 'view', 'settings', 'canvas', 'swot', 'proposal'];
+$allowedPages = ['home', 'generator', 'view', 'settings', 'canvas', 'swot', 'proposal', 'roadmap'];
 $pageName = in_array($page, $allowedPages) ? $page : '404';
 
 // Route to the correct content
@@ -77,6 +77,13 @@ switch ($pageName) {
         $pageTitle = 'Project Proposal';
         include 'templates/header.php';
         include 'pages/proposal.php';
+        include 'templates/footer.php';
+        break;
+
+    case 'roadmap':
+        $pageTitle = 'Project Roadmap';
+        include 'templates/header.php';
+        include 'pages/roadmap.php';
         include 'templates/footer.php';
         break;
 
