@@ -18,4 +18,4 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="/js/script.js"></script>
+<script src="<?php echo $baseUrl; ?>js/script.js"></script>

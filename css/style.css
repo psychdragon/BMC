@@ -454,3 +454,73 @@ h1 {
         font-size: 1.8em;
     }
 }
+
+/* New, refined print styles for A4 Landscape PDF export */
+@media print {
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+    }
+
+    .main-nav, .canvas-actions, .back-link {
+        display: none !important; /* Hide all non-canvas elements */
+    }
+
+    .container, .canvas-container, #canvasToExport {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+        page-break-inside: avoid;
+    }
+
+    #canvasToExport {
+        padding: 4mm; /* More Aggressive Margin Reduction */
+        box-sizing: border-box;
+    }
+
+    .canvas-header {
+        margin-bottom: 3px; /* Final 3px gap */
+        page-break-after: avoid; /* Prevent a page break right after the header */
+    }
+
+    .canvas-header h1 {
+        font-size: 15pt;
+        margin-bottom: 1.5mm; /* More Aggressive Gap Reduction */
+    }
+
+    .canvas-header .subtitle {
+        font-size: 10pt;
+        color: #718096;
+        margin-bottom: 0;
+    }
+
+    .canvas {
+        gap: 6px; /* Tighter gap */
+        border: 1px solid #ddd;
+        padding: 6px;
+        page-break-inside: avoid;
+    }
+
+    .box {
+        border: 1px solid #ccc;
+        font-size: 7pt; /* Slightly smaller font */
+        overflow-wrap: break-word; /* ENSURE TEXT VISIBLE */
+        page-break-inside: avoid;
+    }
+
+    .box h2 {
+        font-size: 8pt;
+        padding: 2px;
+    }
+
+    .box ul {
+        padding: 2px 4px;
+    }
+     .box li {
+        padding: 1px 0 1px 8px;
+    }
+}
