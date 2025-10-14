@@ -483,7 +483,8 @@ h1 {
     }
 
     .canvas-header {
-        margin-bottom: 3mm; /* More Aggressive Gap Reduction */
+        margin-bottom: 3px; /* Final 3px gap */
+        page-break-after: avoid; /* Prevent a page break right after the header */
     }
 
     .canvas-header h1 {
