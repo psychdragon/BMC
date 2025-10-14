@@ -81,7 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         saveStatus.textContent = 'Saving...';
         saveButton.disabled = true;
 
-        fetch('/api/save.php', {
+        const baseUrl = window.APP_BASE_URL || '/';
+        const apiUrl = `${baseUrl}api/save.php`;
+
+        fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -151,7 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         statusElement.style.color = 'inherit';
         generateSwotButton.disabled = true;
 
-        fetch('/api/generate_swot.php', {
+        const baseUrl = window.APP_BASE_URL || '/';
+        const apiUrl = `${baseUrl}api/generate_swot.php`;
+
+        fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

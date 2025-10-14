@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Generating... Please wait.';
 
             // --- 3. Send Data to Backend using Fetch API ---
-            fetch('api/generate.php', {
+            const baseUrl = window.APP_BASE_URL || '/';
+            const apiUrl = `${baseUrl}api/generate.php`;
+
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
