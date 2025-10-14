@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filename:     `${subtitle.textContent.trim().replace(/ /g, '_')}_SWOT_Analysis.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
         };
         html2pdf().set(opt).from(element).save();
     };
