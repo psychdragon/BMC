@@ -127,9 +127,69 @@ document.addEventListener('DOMContentLoaded', () => {
         html2pdf().set(opt).from(element).save();
     };
 
+    const generateSwotButton = document.getElementById('generateSwotBtn');
+
+    // --- SWOT Generation Logic ---
+    const generateSwotAnalysis = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('load');
+        const apiKey = localStorage.getItem('deepseek_api_key');
+
+        if (!fileName) {
+            alert('Cannot generate SWOT: No file is currently loaded.');
+            return;
+        }
+
+        if (!apiKey) {
+            alert('API Key not found. Please set it in the settings page.');
+            window.location.href = 'settings';
+            return;
+        }
+
+        const statusElement = document.getElementById('saveStatus');
+        statusElement.textContent = 'Generating SWOT Analysis...';
+        statusElement.style.color = 'inherit';
+        generateSwotButton.disabled = true;
+
+        fetch('/api/generate_swot.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                bmc_file: fileName,
+                api_key: apiKey
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw new Error(err.message || `HTTP error! status: ${response.status}`); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                statusElement.textContent = 'SWOT Analysis generated successfully!';
+                statusElement.style.color = 'green';
+                // Redirect to the new SWOT page
+                window.location.href = `swot?load=${data.file}`;
+            } else {
+                throw new Error(data.message || 'An unknown error occurred.');
+            }
+        })
+        .catch(error => {
+            console.error('SWOT Generation error:', error);
+            statusElement.textContent = `Error: ${error.message}`;
+            statusElement.style.color = 'red';
+        })
+        .finally(() => {
+            generateSwotButton.disabled = false;
+            setTimeout(() => { statusElement.textContent = ''; }, 5000);
+        });
+    };
+
     if (saveButton) saveButton.addEventListener('click', saveCanvas);
     if (printButton) printButton.addEventListener('click', printCanvas);
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportToPdf);
+    if (generateSwotButton) generateSwotButton.addEventListener('click', generateSwotAnalysis);
 
     // --- Dynamic Loading Logic ---
     const urlParams = new URLSearchParams(window.location.search);

@@ -23,6 +23,7 @@ To provide a user-friendly and accessible tool for entrepreneurs, business stude
 - **Edit Canvas Content:** Users can manually edit the content of each section of the canvas.
 - **Save and Load Canvas:** Users can save their canvas as a JSON file and load it back into the tool for further editing.
 - **Export Canvas:** Users can export their canvas in a printable format (e.g., HTML or PDF).
+- **Business Document Generation:** Users can generate different types of business documents based on their saved Business Model Canvases. The first document type to be implemented is the SWOT analysis.
 
 ### 4.2. User Interface
 
