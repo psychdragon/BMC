@@ -52,8 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.status === 'success') {
                     // --- 4. Handle Success ---
-                    // Redirect to the new canvas page
-                    window.location.href = `canvas.php?load=${data.file}`;
+                    // Add a short delay before redirecting to allow the server to process the new file
+                    setTimeout(() => {
+                        window.location.href = `canvas?load=${data.file}`;
+                    }, 500); // 500ms delay
                 } else {
                     // --- 5. Handle Application-Level Errors ---
                     alert(`An error occurred: ${data.message}`);

@@ -18,47 +18,6 @@ body {
         margin: 0;
     }
 
-/* --- New SWOT Quadrant Styles --- */
-.swot-quadrant-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    border: 1px solid #ccc;
-    margin-top: 20px;
-    width: 100%;
-    aspect-ratio: 1.414 / 1; /* A4 paper ratio for landscape */
-}
-
-.swot-quadrant {
-    padding: 20px;
-    position: relative;
-}
-
-.swot-quadrant:nth-child(1) { /* Strengths */
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-}
-.swot-quadrant:nth-child(2) { /* Weaknesses */
-    border-bottom: 1px solid #ccc;
-}
-.swot-quadrant:nth-child(3) { /* Opportunities */
-    border-right: 1px solid #ccc;
-}
-
-.swot-quadrant-label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #555;
-}
-
-.swot-quadrant ul {
-    margin-top: 40px; /* Space for the label */
-    list-style-position: inside;
-}
-
     .container {
         box-shadow: none !important;
         border-radius: 0 !important;
@@ -564,4 +523,71 @@ h1 {
      .box li {
         padding: 1px 0 1px 8px;
     }
+}
+
+/* --- SWOT Quadrant Styles --- */
+.swot-container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.swot-quadrant-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto; /* Let rows size to content */
+    border: 2px solid #a3b3f7;
+    margin-top: 20px;
+    width: 100%;
+    background: white;
+}
+
+.swot-quadrant {
+    padding: 25px;
+    position: relative;
+    min-height: 250px; /* Give quadrants a minimum height */
+}
+
+.swot-quadrant:nth-child(1) { /* Strengths */
+    border-right: 1px solid #d2d6dc;
+    border-bottom: 1px solid #d2d6dc;
+}
+.swot-quadrant:nth-child(2) { /* Weaknesses */
+    border-bottom: 1px solid #d2d6dc;
+}
+.swot-quadrant:nth-child(3) { /* Opportunities */
+    border-right: 1px solid #d2d6dc;
+}
+
+.swot-quadrant-label {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #667eea;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.swot-quadrant ul {
+    list-style: none;
+    padding-left: 0;
+}
+.swot-quadrant li {
+    padding: 8px 0;
+    color: #4a5568;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 20px;
+}
+.swot-quadrant li::before {
+    content: '✓'; /* Use a check for positive items */
+    position: absolute;
+    left: 0;
+    color: #68d391;
+    font-weight: bold;
+}
+.swot-quadrant.weaknesses li::before,
+.swot-quadrant.threats li::before {
+    content: '✗'; /* Use an X for negative items */
+    color: #f56565;
 }
