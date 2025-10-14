@@ -18,6 +18,47 @@ body {
         margin: 0;
     }
 
+/* --- New SWOT Quadrant Styles --- */
+.swot-quadrant-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    width: 100%;
+    aspect-ratio: 1.414 / 1; /* A4 paper ratio for landscape */
+}
+
+.swot-quadrant {
+    padding: 20px;
+    position: relative;
+}
+
+.swot-quadrant:nth-child(1) { /* Strengths */
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.swot-quadrant:nth-child(2) { /* Weaknesses */
+    border-bottom: 1px solid #ccc;
+}
+.swot-quadrant:nth-child(3) { /* Opportunities */
+    border-right: 1px solid #ccc;
+}
+
+.swot-quadrant-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.swot-quadrant ul {
+    margin-top: 40px; /* Space for the label */
+    list-style-position: inside;
+}
+
     .container {
         box-shadow: none !important;
         border-radius: 0 !important;

@@ -10,21 +10,21 @@
     </div>
 
     <div id="swotToExport">
-        <div class="swot-grid">
-            <div class="swot-box strengths">
-                <h2>Strengths</h2>
+        <div class="swot-quadrant-container">
+            <div class="swot-quadrant strengths">
+                <span class="swot-quadrant-label">Strengths</span>
                 <ul></ul>
             </div>
-            <div class="swot-box weaknesses">
-                <h2>Weaknesses</h2>
+            <div class="swot-quadrant weaknesses">
+                <span class="swot-quadrant-label">Weaknesses</span>
                 <ul></ul>
             </div>
-            <div class="swot-box opportunities">
-                <h2>Opportunities</h2>
+            <div class="swot-quadrant opportunities">
+                <span class="swot-quadrant-label">Opportunities</span>
                 <ul></ul>
             </div>
-            <div class="swot-box threats">
-                <h2>Threats</h2>
+            <div class="swot-quadrant threats">
+                <span class="swot-quadrant-label">Threats</span>
                 <ul></ul>
             </div>
         </div>

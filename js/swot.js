@@ -6,14 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to render the SWOT analysis from JSON data
     const renderSwot = (data) => {
+        const container = document.querySelector('.swot-quadrant-container');
+        if (!container) return;
+
         const renderList = (category, items) => {
-            const container = swotGrid.querySelector(`.${category} ul`);
-            if (container) {
-                container.innerHTML = '';
+            const quadrant = container.querySelector(`.${category} ul`);
+            if (quadrant) {
+                quadrant.innerHTML = '';
                 items.forEach(itemText => {
                     const li = document.createElement('li');
                     li.textContent = itemText;
-                    container.appendChild(li);
+                    quadrant.appendChild(li);
                 });
             }
         };
