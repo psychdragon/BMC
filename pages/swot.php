@@ -5,8 +5,10 @@
     </div>
 
     <div class="swot-actions">
+        <button id="saveSwotBtn">💾 Save Changes</button>
         <button id="printSwotBtn">🖨️ Print</button>
         <button id="exportSwotPdfBtn">📄 Export to PDF</button>
+        <p id="saveStatus" class="status-message"></p>
     </div>
 
     <div id="swotToExport">

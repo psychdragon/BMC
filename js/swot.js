@@ -1,8 +1,74 @@
 document.addEventListener('DOMContentLoaded', () => {
     const swotGrid = document.querySelector('.swot-grid');
     const subtitle = document.querySelector('.subtitle');
+    const saveButton = document.getElementById('saveSwotBtn');
+    const saveStatus = document.getElementById('saveStatus');
     const printButton = document.getElementById('printSwotBtn');
     const exportPdfButton = document.getElementById('exportSwotPdfBtn');
+
+    // --- Save Logic ---
+    const saveSwot = () => {
+        const swotData = {
+            strengths: [],
+            weaknesses: [],
+            opportunities: [],
+            threats: []
+        };
+
+        document.querySelectorAll('.swot-quadrant').forEach(quadrant => {
+            const category = Array.from(quadrant.classList).find(c => ['strengths', 'weaknesses', 'opportunities', 'threats'].includes(c));
+            if (category) {
+                const items = [];
+                quadrant.querySelectorAll('li').forEach(li => {
+                    items.push(li.textContent.trim());
+                });
+                swotData[category] = items;
+            }
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('load');
+
+        if (!fileName) {
+            alert('Cannot save: No file is currently loaded.');
+            return;
+        }
+
+        saveStatus.textContent = 'Saving...';
+        saveButton.disabled = true;
+
+        const baseUrl = window.APP_BASE_URL || '/';
+        const apiUrl = `${baseUrl}api/save_swot.php`;
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                file: fileName,
+                content: swotData
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                saveStatus.textContent = 'Saved successfully!';
+                saveStatus.style.color = 'green';
+            } else {
+                saveStatus.textContent = `Error: ${data.message}`;
+                saveStatus.style.color = 'red';
+            }
+        })
+        .catch(error => {
+            console.error('Save error:', error);
+            saveStatus.textContent = 'A network error occurred.';
+            saveStatus.style.color = 'red';
+        })
+        .finally(() => {
+            saveButton.disabled = false;
+            setTimeout(() => { saveStatus.textContent = ''; }, 3000);
+        });
+    };
+
 
     // Function to render the SWOT analysis from JSON data
     const renderSwot = (data) => {
@@ -16,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 items.forEach(itemText => {
                     const li = document.createElement('li');
                     li.textContent = itemText;
+                    li.setAttribute('contenteditable', 'true'); // Make item editable
                     quadrant.appendChild(li);
                 });
             }
@@ -44,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         html2pdf().set(opt).from(element).save();
     };
 
+    if (saveButton) saveButton.addEventListener('click', saveSwot);
     if (printButton) printButton.addEventListener('click', printSwot);
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportToPdf);
 
