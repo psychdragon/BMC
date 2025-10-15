@@ -890,7 +890,7 @@ li:hover .list-actions {
 
     /* --- Proposal Print Styles --- */
     .proposal-actions, .main-nav, .back-link,
-    .roadmap-actions {
+    .roadmap-actions, .swot-actions {
         display: none !important;
     }
 
