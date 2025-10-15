@@ -387,8 +387,8 @@ h1 {
 /* --- New Project List Styles --- */
 .project-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
 }
 
 .project-card {
@@ -439,11 +439,29 @@ h1 {
     background: #cbd5e0;
 }
 
+.doc-links-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-.doc-links {
+.view-links, .generate-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.doc-links-container h4 {
+    font-size: 1em;
+    color: #4a5568;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 5px;
+}
+
+.no-docs {
+    font-style: italic;
+    color: #718096;
 }
 
 .doc-link, .generate-link {
@@ -871,7 +889,8 @@ li:hover .list-actions {
     }
 
     /* --- Proposal Print Styles --- */
-    .proposal-actions, .main-nav, .back-link {
+    .proposal-actions, .main-nav, .back-link,
+    .roadmap-actions {
         display: none !important;
     }
 

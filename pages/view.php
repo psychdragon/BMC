@@ -31,30 +31,40 @@
                             <h2 contenteditable='true'>{$displayName}</h2>
                             <button class='rename-project-btn'>💾</button>
                           </div>";
-                    echo "<div class='doc-links' data-project-basename='" . htmlspecialchars($baseName) . "'>";
+                    echo "<div class='doc-links-container' data-project-basename='" . htmlspecialchars($baseName) . "'>";
 
-                    // --- View Links ---
+                    // --- View Links Column ---
+                    echo "<div class='view-links'>";
+                    echo "<h4>View Documents</h4>";
                     $docMap = [
                         'BMC' => ['suffix' => '.json', 'urlPath' => 'canvas'],
                         'SWOT' => ['suffix' => '-swot.json', 'urlPath' => 'swot'],
                         'Proposal' => ['suffix' => '-proposal.json', 'urlPath' => 'proposal'],
                         'Roadmap' => ['suffix' => '-roadmap.json', 'urlPath' => 'roadmap']
                     ];
-
+                    $foundDocs = 0;
                     foreach ($docMap as $label => $details) {
                         $fileName = $baseName . $details['suffix'];
                         if (in_array($fileName, $projectFiles)) {
-                            echo "<a href='{$baseUrl}{$details['urlPath']}?load=" . htmlspecialchars($fileName) . "' class='doc-link'>View {$label}</a>";
+                            echo "<a href='{$baseUrl}{$details['urlPath']}?load=" . htmlspecialchars($fileName) . "' class='doc-link'>{$label}</a>";
+                            $foundDocs++;
                         }
                     }
+                    if ($foundDocs === 0) {
+                        echo "<p class='no-docs'>No documents found.</p>";
+                    }
+                    echo "</div>"; // .view-links
 
-                    // --- Generation Links (always shown) ---
+                    // --- Generation Links Column ---
+                    echo "<div class='generate-links'>";
+                    echo "<h4>Generate Documents</h4>";
                     $bmcFile = $baseName . '.json';
-                    echo "<a href='{$baseUrl}canvas?load=" . htmlspecialchars($bmcFile) . "' class='generate-link'>Generate SWOT</a>";
-                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='proposal' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Proposal</a>";
-                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='roadmap' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Roadmap</a>";
+                    echo "<a href='{$baseUrl}canvas?load=" . htmlspecialchars($bmcFile) . "' class='generate-link'>SWOT</a>";
+                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='proposal' data-file='" . htmlspecialchars($bmcFile) . "'>Proposal</a>";
+                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='roadmap' data-file='" . htmlspecialchars($bmcFile) . "'>Roadmap</a>";
+                    echo "</div>"; // .generate-links
 
-                    echo "</div></div>"; // .doc-links, .project-card
+                    echo "</div></div>"; // .doc-links-container, .project-card
                 }
             } else {
                 echo "<p>No projects found. Create a new Business Model Canvas to start a project.</p>";
