@@ -29,7 +29,8 @@ if ($baseUrl == '' || $baseUrl == '/') {
     </div>
     <header class="main-nav">
         <div class="logo">
-            <a href="<?php echo $baseUrl; ?>">BMCGen</a>
+            <div class="placeholder-logo">D</div>
+            <a href="<?php echo $baseUrl; ?>">DraftoryAI Project Generator</a>
         </div>
         <nav class="nav-links">
             <a href="<?php echo $baseUrl; ?>generator">🚀 Generate New Canvas</a>

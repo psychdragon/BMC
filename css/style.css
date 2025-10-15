@@ -128,6 +128,24 @@ h1 {
     justify-content: space-between;
     align-items: center;
 }
+.main-nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.placeholder-logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding-bottom: 4px; /* Optical adjustment */
+}
 .main-nav .logo a {
     font-size: 1.5em;
     font-weight: bold;
