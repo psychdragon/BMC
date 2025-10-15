@@ -61,23 +61,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 generationStatus.style.color = 'green';
 
                 // --- Dynamic UI Update ---
-                const docLinksContainer = buttonElement.closest('.doc-links');
-                const newFileName = data.file;
-                const docLabel = docType.charAt(0).toUpperCase() + docType.slice(1);
+                const docLinksContainer = buttonElement.closest('.doc-links-container');
+                if (docLinksContainer) {
+                    const viewLinksColumn = docLinksContainer.querySelector('.view-links');
+                    const newFileName = data.file;
+                    const docLabel = docType.charAt(0).toUpperCase() + docType.slice(1);
 
-                // Create the new "View" link
-                const newLink = document.createElement('a');
-                newLink.href = `${baseUrl}${docType}?load=${newFileName}`;
-                newLink.className = 'doc-link';
-                newLink.textContent = `View ${docLabel}`;
+                    // Create the new "View" link
+                    const newLink = document.createElement('a');
+                    newLink.href = `${baseUrl}${docType}?load=${newFileName}`;
+                    newLink.className = 'doc-link';
+                    newLink.textContent = docLabel; // Just the label, e.g., "Proposal"
 
-                // Check if a "View" link for this doc type already exists. If so, replace it.
-                const existingLink = docLinksContainer.querySelector(`a[href*='${docType}?load=']`);
-                if (existingLink) {
-                    existingLink.replaceWith(newLink);
-                } else {
-                    // Otherwise, just append the new link
-                    docLinksContainer.appendChild(newLink);
+                    // Check if a "View" link for this doc type already exists. If so, replace it.
+                    const existingLink = viewLinksColumn.querySelector(`a[href*='${docType}?load=']`);
+                    if (existingLink) {
+                        existingLink.href = newLink.href; // Just update the href in case the file name changed
+                    } else {
+                        // If no docs were found previously, remove the placeholder text
+                        const noDocsP = viewLinksColumn.querySelector('.no-docs');
+                        if (noDocsP) {
+                            noDocsP.remove();
+                        }
+                        // Append the new link to the "View Documents" column
+                        viewLinksColumn.appendChild(newLink);
+                    }
                 }
 
                 // Optional: You might want to hide or remove the generate button now
