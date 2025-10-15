@@ -12,7 +12,8 @@
             // Group files by project base name
             foreach ($files as $file) {
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'json') {
-                    $baseName = preg_replace('/(-swot|-proposal)\.json$/', '', $file);
+                    // Updated regex to handle all known suffixes
+                    $baseName = preg_replace('/(-swot|-proposal|-roadmap)\.json$/', '', $file);
                     $baseName = str_replace('.json', '', $baseName);
 
                     if (!isset($projects[$baseName])) {
