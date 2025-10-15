@@ -24,6 +24,9 @@ if ($baseUrl == '' || $baseUrl == '/') {
     </script>
 </head>
 <body>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
     <header class="main-nav">
         <div class="logo">
             <a href="<?php echo $baseUrl; ?>">BMCGen</a>

@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generationStatus.textContent = `Generating ${docType} for ${baseFile}...`;
         generationStatus.style.color = 'inherit';
-        buttonElement.style.pointerEvents = 'none'; // Disable button during generation
-        buttonElement.style.opacity = '0.5';
+        showLoader();
 
         const baseUrl = window.APP_BASE_URL || '/';
         const apiUrl = `${baseUrl}api/generate_${docType}.php`;
@@ -101,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             generationStatus.style.color = 'red';
         })
         .finally(() => {
-            // Re-enable the button
-            buttonElement.style.pointerEvents = 'auto';
-            buttonElement.style.opacity = '1';
+            hideLoader();
             // Clear status after a few seconds
             setTimeout(() => { generationStatus.textContent = ''; }, 5000);
         });
@@ -116,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generationStatus.textContent = `Renaming '${oldName}' to '${newName}'...`;
         generationStatus.style.color = 'inherit';
+        showLoader();
 
         const baseUrl = window.APP_BASE_URL || '/';
         const apiUrl = `${baseUrl}api/rename_project.php`;
@@ -149,6 +147,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Rename error:', error);
             generationStatus.textContent = `Error: ${error.message}`;
             generationStatus.style.color = 'red';
+        })
+        .finally(() => {
+            hideLoader();
         });
     };
 });

@@ -1,5 +1,19 @@
 // js/utils.js
 
+const loadingOverlay = document.getElementById('loading-overlay');
+
+function showLoader() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'flex';
+    }
+}
+
+function hideLoader() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}
+
 function initializeListActions(containerSelector) {
     const container = document.querySelector(containerSelector);
     if (!container) {

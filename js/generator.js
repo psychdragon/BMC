@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // --- 2. Provide User Feedback ---
-            submitButton.disabled = true;
-            submitButton.textContent = 'Generating... Please wait.';
+            showLoader();
 
             // --- 3. Send Data to Backend using Fetch API ---
             const baseUrl = window.APP_BASE_URL || '/';
@@ -68,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // --- 6. Handle Network/Fetch Errors ---
                 console.error('Fetch Error:', error);
                 alert(`A critical error occurred: ${error.message}. Check the console for more details.`);
+            })
+            .finally(() => {
+                hideLoader();
                 // Re-enable the button
                 submitButton.disabled = false;
                 submitButton.textContent = 'Generate Canvas';

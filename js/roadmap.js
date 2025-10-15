@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         saveStatus.textContent = 'Saving...';
-        saveButton.disabled = true;
+        showLoader();
 
         const baseUrl = window.APP_BASE_URL || '/';
         const apiUrl = `${baseUrl}api/save_roadmap.php`;
@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveStatus.style.color = 'red';
         })
         .finally(() => {
+            hideLoader();
             saveButton.disabled = false;
             setTimeout(() => { saveStatus.textContent = ''; }, 3000);
         });

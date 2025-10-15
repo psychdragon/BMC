@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         saveStatus.textContent = 'Saving...';
-        saveButton.disabled = true;
+        showLoader();
 
         const baseUrl = window.APP_BASE_URL || '/';
         const apiUrl = `${baseUrl}api/save.php`;
@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveStatus.style.color = 'red';
         })
         .finally(() => {
+            hideLoader();
             saveButton.disabled = false;
             setTimeout(() => { saveStatus.textContent = ''; }, 3000);
         });
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const statusElement = document.getElementById('saveStatus');
         statusElement.textContent = 'Generating SWOT Analysis...';
         statusElement.style.color = 'inherit';
-        generateSwotButton.disabled = true;
+        showLoader();
 
         const baseUrl = window.APP_BASE_URL || '/';
         const apiUrl = `${baseUrl}api/generate_swot.php`;
@@ -195,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
             statusElement.style.color = 'red';
         })
         .finally(() => {
+            hideLoader();
             generateSwotButton.disabled = false;
             setTimeout(() => { statusElement.textContent = ''; }, 5000);
         });
