@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             const baseFile = target.dataset.file;
             const docType = target.dataset.docType;
-            handleDocumentGeneration(baseFile, docType);
+            handleDocumentGeneration(target, baseFile, docType); // Pass the button element
         }
 
         // --- Handle Project Rename ---
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const handleDocumentGeneration = (baseFile, docType) => {
+    const handleDocumentGeneration = (buttonElement, baseFile, docType) => {
         const apiKey = localStorage.getItem('deepSeekApiKey');
 
         if (!apiKey) {
@@ -35,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generationStatus.textContent = `Generating ${docType} for ${baseFile}...`;
         generationStatus.style.color = 'inherit';
+        buttonElement.style.pointerEvents = 'none'; // Disable button during generation
+        buttonElement.style.opacity = '0.5';
 
         const baseUrl = window.APP_BASE_URL || '/';
         const apiUrl = `${baseUrl}api/generate_${docType}.php`;
@@ -55,11 +57,32 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             if (data.status === 'success') {
-                generationStatus.textContent = `${docType.charAt(0).toUpperCase() + docType.slice(1)} generated successfully! Reloading...`;
+                generationStatus.textContent = `${docType.charAt(0).toUpperCase() + docType.slice(1)} generated successfully!`;
                 generationStatus.style.color = 'green';
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
+
+                // --- Dynamic UI Update ---
+                const docLinksContainer = buttonElement.closest('.doc-links');
+                const newFileName = data.file;
+                const docLabel = docType.charAt(0).toUpperCase() + docType.slice(1);
+
+                // Create the new "View" link
+                const newLink = document.createElement('a');
+                newLink.href = `${baseUrl}${docType}?load=${newFileName}`;
+                newLink.className = 'doc-link';
+                newLink.textContent = `View ${docLabel}`;
+
+                // Check if a "View" link for this doc type already exists. If so, replace it.
+                const existingLink = docLinksContainer.querySelector(`a[href*='${docType}?load=']`);
+                if (existingLink) {
+                    existingLink.replaceWith(newLink);
+                } else {
+                    // Otherwise, just append the new link
+                    docLinksContainer.appendChild(newLink);
+                }
+
+                // Optional: You might want to hide or remove the generate button now
+                // For now, we'll just re-enable it to allow regeneration.
+
             } else {
                 throw new Error(data.message || 'An unknown error occurred.');
             }
@@ -68,6 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`${docType} Generation error:`, error);
             generationStatus.textContent = `Error: ${error.message}`;
             generationStatus.style.color = 'red';
+        })
+        .finally(() => {
+            // Re-enable the button
+            buttonElement.style.pointerEvents = 'auto';
+            buttonElement.style.opacity = '1';
+            // Clear status after a few seconds
+            setTimeout(() => { generationStatus.textContent = ''; }, 5000);
         });
     };
 

@@ -31,42 +31,28 @@
                             <h2 contenteditable='true'>{$displayName}</h2>
                             <button class='rename-project-btn'>💾</button>
                           </div>";
-                    echo "<div class='doc-links'>";
+                    echo "<div class='doc-links' data-project-basename='" . htmlspecialchars($baseName) . "'>";
 
-                    // Define the order and labels for documents
-                    $docTypes = [
-                        '.json' => 'BMC',
-                        '-swot.json' => 'SWOT',
-                        '-proposal.json' => 'Proposal',
-                        '-roadmap.json' => 'Roadmap'
+                    // --- View Links ---
+                    $docMap = [
+                        'BMC' => ['suffix' => '.json', 'urlPath' => 'canvas'],
+                        'SWOT' => ['suffix' => '-swot.json', 'urlPath' => 'swot'],
+                        'Proposal' => ['suffix' => '-proposal.json', 'urlPath' => 'proposal'],
+                        'Roadmap' => ['suffix' => '-roadmap.json', 'urlPath' => 'roadmap']
                     ];
 
-                    foreach ($docTypes as $suffix => $label) {
-                        $fileName = $baseName . $suffix;
+                    foreach ($docMap as $label => $details) {
+                        $fileName = $baseName . $details['suffix'];
                         if (in_array($fileName, $projectFiles)) {
-                            $urlPath = ($label === 'BMC') ? 'canvas' : strtolower($label);
-                            echo "<a href='{$baseUrl}{$urlPath}?load=" . htmlspecialchars($fileName) . "' class='doc-link'>View {$label}</a>";
+                            echo "<a href='{$baseUrl}{$details['urlPath']}?load=" . htmlspecialchars($fileName) . "' class='doc-link'>View {$label}</a>";
                         }
                     }
 
-                    // --- Generation Links ---
+                    // --- Generation Links (always shown) ---
                     $bmcFile = $baseName . '.json';
-                    $swotFile = $baseName . '-swot.json';
-                    $proposalFile = $baseName . '-proposal.json';
-                    $roadmapFile = $baseName . '-roadmap.json';
-
-                    echo "<div class='generation-links'>";
-                    if (in_array($bmcFile, $projectFiles) && !in_array($swotFile, $projectFiles)) {
-                        // This link is handled by canvas.php's JS
-                        echo "<a href='{$baseUrl}canvas?load=" . htmlspecialchars($bmcFile) . "' class='generate-link'>Generate SWOT</a>";
-                    }
-                    if (in_array($swotFile, $projectFiles) && !in_array($proposalFile, $projectFiles)) {
-                        echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='proposal' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Proposal</a>";
-                    }
-                    if (in_array($proposalFile, $projectFiles) && !in_array($roadmapFile, $projectFiles)) {
-                        echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='roadmap' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Roadmap</a>";
-                    }
-                    echo "</div>"; // .generation-links
+                    echo "<a href='{$baseUrl}canvas?load=" . htmlspecialchars($bmcFile) . "' class='generate-link'>Generate SWOT</a>";
+                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='proposal' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Proposal</a>";
+                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='roadmap' data-file='" . htmlspecialchars($bmcFile) . "'>Generate Roadmap</a>";
 
                     echo "</div></div>"; // .doc-links, .project-card
                 }

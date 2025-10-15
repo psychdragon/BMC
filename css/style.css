@@ -442,7 +442,7 @@ h1 {
 
 .doc-links {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
