@@ -4,11 +4,10 @@
     </div> <!-- .container -->
     <footer>
         <?php
-        // Get the last git commit hash and date
-        $commitHash = trim(shell_exec('git rev-parse --short HEAD'));
-        $commitDate = trim(shell_exec('git log -1 --format=%cd --date=iso'));
-        if ($commitHash && $commitDate) {
-            echo "<p>Last updated: " . htmlspecialchars($commitDate) . " (rev: " . htmlspecialchars($commitHash) . ")</p>";
+        // Get the last modification time of the main index file
+        $lastUpdated = @filemtime(__DIR__ . '/../index.php');
+        if ($lastUpdated !== false) {
+            echo "<p>Last updated: " . date('Y-m-d H:i:s', $lastUpdated) . "</p>";
         }
         ?>
     </footer>
