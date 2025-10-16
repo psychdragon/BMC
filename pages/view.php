@@ -13,7 +13,7 @@
             foreach ($files as $file) {
                 if (pathinfo($file, PATHINFO_EXTENSION) === 'json') {
                     // Updated regex to handle all known suffixes
-                    $baseName = preg_replace('/(-swot|-proposal|-roadmap|-plan)\.json$/', '', $file);
+                    $baseName = preg_replace('/(-swot|-proposal|-roadmap)\.json$/', '', $file);
                     $baseName = str_replace('.json', '', $baseName);
 
                     if (!isset($projects[$baseName])) {
@@ -41,8 +41,7 @@
                         'BMC' => ['suffix' => '.json', 'urlPath' => 'canvas'],
                         'SWOT' => ['suffix' => '-swot.json', 'urlPath' => 'swot'],
                         'Proposal' => ['suffix' => '-proposal.json', 'urlPath' => 'proposal'],
-                        'Roadmap' => ['suffix' => '-roadmap.json', 'urlPath' => 'roadmap'],
-                        'Plan' => ['suffix' => '-plan.json', 'urlPath' => 'plan']
+                        'Roadmap' => ['suffix' => '-roadmap.json', 'urlPath' => 'roadmap']
                     ];
                     $foundDocs = 0;
                     foreach ($docMap as $label => $details) {
@@ -64,7 +63,6 @@
                     echo "<a href='{$baseUrl}canvas?load=" . htmlspecialchars($bmcFile) . "' class='generate-link'>SWOT</a>";
                     echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='proposal' data-file='" . htmlspecialchars($bmcFile) . "'>Proposal</a>";
                     echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='roadmap' data-file='" . htmlspecialchars($bmcFile) . "'>Roadmap</a>";
-                    echo "<a href='#' class='generate-doc-btn generate-link' data-doc-type='plan' data-file='" . htmlspecialchars($bmcFile) . "'>Plan</a>";
                     echo "</div>"; // .generate-links
 
                     echo "</div></div>"; // .doc-links-container, .project-card

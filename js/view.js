@@ -25,6 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const handleDocumentGeneration = (buttonElement, baseFile, docType) => {
+        const apiKey = localStorage.getItem('deepSeekApiKey');
+
+        if (!apiKey) {
+            alert('API Key not found. Please set it in the settings page.');
+            window.location.href = 'settings';
+            return;
+        }
+
         generationStatus.textContent = `Generating ${docType} for ${baseFile}...`;
         generationStatus.style.color = 'inherit';
         showLoader();
@@ -36,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                bmc_file: baseFile
+                bmc_file: baseFile,
+                api_key: apiKey
             })
         })
         .then(response => {
