@@ -2,6 +2,8 @@
 // Set the content type to JSON
 header('Content-Type: application/json');
 
+require_once 'config.php';
+
 // --- 1. Basic Input Validation ---
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); // Method Not Allowed

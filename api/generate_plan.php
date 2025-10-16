@@ -1,12 +1,12 @@
 <?php
-// api/generate_proposal.php
+// api/generate_plan.php
 header('Content-Type: application/json');
 
 require_once 'config.php';
 
 // --- 1. Basic Input Validation ---
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405); // Method Not Allowed
+    http_response_code(405);
     echo json_encode(['status' => 'error', 'message' => 'Only POST method is accepted.']);
     exit;
 }
@@ -16,7 +16,7 @@ $bmcFile = $input['bmc_file'] ?? null;
 $apiKey = DEEPSEEK_API_KEY;
 
 if (empty($bmcFile)) {
-    http_response_code(400); // Bad Request
+    http_response_code(400);
     echo json_encode(['status' => 'error', 'message' => 'Missing bmc_file.']);
     exit;
 }
@@ -35,34 +35,44 @@ if ($safeBmcFile !== $bmcFile) {
     exit;
 }
 
-$swotFile = str_replace('.json', '-swot.json', $safeBmcFile);
-$proposalFile = str_replace('.json', '-proposal.json', $safeBmcFile);
+$baseName = str_replace('.json', '', $safeBmcFile);
+$swotFile = $baseName . '-swot.json';
+$proposalFile = $baseName . '-proposal.json';
+$roadmapFile = $baseName . '-roadmap.json';
+$planFile = $baseName . '-plan.json';
 
 $bmcFilePath = '../data/' . $safeBmcFile;
 $swotFilePath = '../data/' . $swotFile;
 $proposalFilePath = '../data/' . $proposalFile;
+$roadmapFilePath = '../data/' . $roadmapFile;
+$planFilePath = '../data/' . $planFile;
 
 // --- 3. Read and Consolidate Input Files ---
-if (!file_exists($bmcFilePath) || !file_exists($swotFilePath)) {
-    http_response_code(404); // Not Found
-    echo json_encode(['status' => 'error', 'message' => 'Required BMC or SWOT file not found.']);
+if (!file_exists($bmcFilePath) || !file_exists($swotFilePath) || !file_exists($proposalFilePath) || !file_exists($roadmapFilePath)) {
+    http_response_code(404);
+    echo json_encode(['status' => 'error', 'message' => 'Required source documents (BMC, SWOT, Proposal, or Roadmap) not found.']);
     exit;
 }
 
 $bmcData = file_get_contents($bmcFilePath);
 $swotData = file_get_contents($swotFilePath);
+$proposalData = file_get_contents($proposalFilePath);
+$roadmapData = file_get_contents($roadmapFilePath);
 
-$consolidatedData = "Business Model Canvas:\n" . $bmcData . "\n\nSWOT Analysis:\n" . $swotData;
+$consolidatedData = "Business Model Canvas:\n" . $bmcData .
+                    "\n\nSWOT Analysis:\n" . $swotData .
+                    "\n\nProject Proposal:\n" . $proposalData .
+                    "\n\nProject Roadmap:\n" . $roadmapData;
 
 // --- 4. Prepare the API Request ---
 $apiEndpoint = 'https://api.deepseek.com/chat/completions';
-$systemPromptTemplate = file_get_contents('system_prompt_proposal.md');
+$systemPromptTemplate = file_get_contents('system_prompt_plan.md');
 $prompt = str_replace('[PROJECT_DATA]', $consolidatedData, $systemPromptTemplate);
 
 $requestData = [
     'model' => 'deepseek-chat',
     'messages' => [
-        ['role' => 'system', 'content' => 'You are an expert business consultant AI.'],
+        ['role' => 'system', 'content' => 'You are an expert project manager AI.'],
         ['role' => 'user', 'content' => $prompt]
     ],
     'response_format' => ['type' => 'json_object']
@@ -79,7 +89,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestData));
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_TIMEOUT, 180); // 3 minutes timeout for a larger document
+curl_setopt($ch, CURLOPT_TIMEOUT, 180);
 
 $response = curl_exec($ch);
 $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -120,9 +130,9 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     exit;
 }
 
-if (file_put_contents($proposalFilePath, json_encode($decodedContent, JSON_PRETTY_PRINT))) {
-    echo json_encode(['status' => 'success', 'message' => 'Project proposal generated successfully!', 'file' => $proposalFile]);
+if (file_put_contents($planFilePath, json_encode($decodedContent, JSON_PRETTY_PRINT))) {
+    echo json_encode(['status' => 'success', 'message' => 'Project plan generated successfully!', 'file' => $planFile]);
 } else {
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Failed to save the generated proposal file.']);
+    echo json_encode(['status' => 'error', 'message' => 'Failed to save the generated plan file.']);
 }

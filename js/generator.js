@@ -8,14 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); // Prevent the default form submission
 
             const businessIdea = businessIdeaTextarea.value.trim();
-            const apiKey = localStorage.getItem('deepSeekApiKey');
 
             // --- 1. Frontend Validation ---
-            if (!apiKey) {
-                alert('API Key not found. Please set your DeepSeek API key in the Settings page.');
-                return;
-            }
-
             if (!businessIdea) {
                 alert('Please enter a business idea.');
                 return;
@@ -35,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    business_idea: businessIdea,
-                    api_key: apiKey
+                    business_idea: businessIdea
                 })
             })
             .then(response => {

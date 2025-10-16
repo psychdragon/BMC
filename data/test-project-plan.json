@@ -1,0 +1,31 @@
+{
+  "project_name": "Test Project for Verification",
+  "project_plan": [
+    {
+      "phase_name": "Phase 1: Initial Setup",
+      "phase_duration": "1 Week",
+      "tasks": [
+        {
+          "task_name": "Configure Environment",
+          "task_description": "Setup the local development environment.",
+          "dependencies": ["None"],
+          "assigned_to": "Dev Team",
+          "status": "Completed"
+        }
+      ]
+    },
+    {
+        "phase_name": "Phase 2: Core Development",
+        "phase_duration": "4 Weeks",
+        "tasks": [
+            {
+                "task_name": "Implement Feature A",
+                "task_description": "Develop the main functionality of Feature A.",
+                "dependencies": ["Configure Environment"],
+                "assigned_to": "Backend Developer",
+                "status": "In Progress"
+            }
+        ]
+    }
+  ]
+}
