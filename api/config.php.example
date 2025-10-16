@@ -1,0 +1,8 @@
+<?php
+// config.php.example
+// Copy this file to config.php and enter your DeepSeek API key.
+
+// IMPORTANT: Make sure the actual config.php file is NOT committed to version control.
+// The .gitignore file should contain a line for "api/config.php"
+
+// define('DEEPSEEK_API_KEY', 'YOUR_API_KEY_HERE');

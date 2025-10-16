@@ -2,6 +2,15 @@
 // api/generate_roadmap.php
 header('Content-Type: application/json');
 
+// --- 0. Configuration Check ---
+if (file_exists('config.php')) {
+    require_once 'config.php';
+} else {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Configuration file is missing. Please copy config.php.example to config.php and set your API key.']);
+    exit;
+}
+
 // --- 1. Basic Input Validation ---
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
