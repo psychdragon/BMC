@@ -2,8 +2,6 @@
 // api/generate_proposal.php
 header('Content-Type: application/json');
 
-require_once 'config.php';
-
 // --- 1. Basic Input Validation ---
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405); // Method Not Allowed
@@ -13,17 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $bmcFile = $input['bmc_file'] ?? null;
-$apiKey = DEEPSEEK_API_KEY;
+$apiKey = $input['api_key'] ?? null;
 
-if (empty($bmcFile)) {
+if (empty($bmcFile) || empty($apiKey)) {
     http_response_code(400); // Bad Request
-    echo json_encode(['status' => 'error', 'message' => 'Missing bmc_file.']);
-    exit;
-}
-
-if ($apiKey === 'YOUR_API_KEY_HERE') {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'API key is not configured. Please set it in api/config.php.']);
+    echo json_encode(['status' => 'error', 'message' => 'Missing bmc_file or api_key.']);
     exit;
 }
 

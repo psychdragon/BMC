@@ -11,17 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $businessIdea = $input['business_idea'] ?? null;
-$apiKey = DEEPSEEK_API_KEY;
+$apiKey = $input['api_key'] ?? null;
 
-if (empty($businessIdea)) {
+if (empty($businessIdea) || empty($apiKey)) {
     http_response_code(400); // Bad Request
-    echo json_encode(['status' => 'error', 'message' => 'Business idea is required.']);
-    exit;
-}
-
-if ($apiKey === 'YOUR_API_KEY_HERE') {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'API key is not configured. Please set it in api/config.php.']);
+    echo json_encode(['status' => 'error', 'message' => 'Missing business_idea or api_key.']);
     exit;
 }
 
