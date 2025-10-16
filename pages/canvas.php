@@ -8,6 +8,7 @@
         <button id="saveCanvasBtn">💾 Save Changes</button>
         <button id="printBtn">🖨️ Print</button>
         <button id="exportPdfBtn">📄 Export to PDF</button>
+        <button id="generateSwotBtn">📊 Generate SWOT Analysis</button>
         <p id="saveStatus" class="status-message"></p>
     </div>
 

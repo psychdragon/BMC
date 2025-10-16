@@ -22,11 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // --- 2. Provide User Feedback ---
-            submitButton.disabled = true;
-            submitButton.textContent = 'Generating... Please wait.';
+            showLoader();
 
             // --- 3. Send Data to Backend using Fetch API ---
-            fetch('api/generate.php', {
+            const baseUrl = window.APP_BASE_URL || '/';
+            const apiUrl = `${baseUrl}api/generate.php`;
+
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,8 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.status === 'success') {
                     // --- 4. Handle Success ---
-                    // Redirect to the new canvas page
-                    window.location.href = `canvas.php?load=${data.file}`;
+                    // Add a short delay before redirecting to allow the server to process the new file
+                    setTimeout(() => {
+                        window.location.href = `canvas?load=${data.file}`;
+                    }, 500); // 500ms delay
                 } else {
                     // --- 5. Handle Application-Level Errors ---
                     alert(`An error occurred: ${data.message}`);
@@ -63,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // --- 6. Handle Network/Fetch Errors ---
                 console.error('Fetch Error:', error);
                 alert(`A critical error occurred: ${error.message}. Check the console for more details.`);
+            })
+            .finally(() => {
+                hideLoader();
                 // Re-enable the button
                 submitButton.disabled = false;
                 submitButton.textContent = 'Generate Canvas';

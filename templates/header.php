@@ -24,13 +24,17 @@ if ($baseUrl == '' || $baseUrl == '/') {
     </script>
 </head>
 <body>
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
     <header class="main-nav">
         <div class="logo">
-            <a href="<?php echo $baseUrl; ?>">BMCGen</a>
+            <div class="placeholder-logo">D</div>
+            <a href="<?php echo $baseUrl; ?>">DraftoryAI Project Generator</a>
         </div>
         <nav class="nav-links">
             <a href="<?php echo $baseUrl; ?>generator">🚀 Generate New Canvas</a>
-            <a href="<?php echo $baseUrl; ?>view">📂 View Saved Canvases</a>
+            <a href="<?php echo $baseUrl; ?>view">📂 View Projects</a>
             <a href="<?php echo $baseUrl; ?>settings">⚙️ Settings</a>
         </nav>
     </header>

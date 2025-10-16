@@ -26,7 +26,7 @@ if (empty($page)) {
 }
 
 // Whitelist of allowed pages to prevent arbitrary file inclusion
-$allowedPages = ['home', 'generator', 'view', 'settings', 'canvas'];
+$allowedPages = ['home', 'generator', 'view', 'settings', 'canvas', 'swot', 'proposal', 'roadmap'];
 $pageName = in_array($page, $allowedPages) ? $page : '404';
 
 // Route to the correct content
@@ -46,7 +46,7 @@ switch ($pageName) {
         break;
 
     case 'view':
-        $pageTitle = 'View Saved Canvases - Business Model Canvas Generator';
+        $pageTitle = 'View Projects - Business Model Canvas Generator';
         include 'templates/header.php';
         include 'pages/view.php';
         include 'templates/footer.php';
@@ -63,6 +63,27 @@ switch ($pageName) {
         $pageTitle = 'Business Model Canvas';
         include 'templates/header.php';
         include 'pages/canvas.php';
+        include 'templates/footer.php';
+        break;
+
+    case 'swot':
+        $pageTitle = 'SWOT Analysis';
+        include 'templates/header.php';
+        include 'pages/swot.php';
+        include 'templates/footer.php';
+        break;
+
+    case 'proposal':
+        $pageTitle = 'Project Proposal';
+        include 'templates/header.php';
+        include 'pages/proposal.php';
+        include 'templates/footer.php';
+        break;
+
+    case 'roadmap':
+        $pageTitle = 'Project Roadmap';
+        include 'templates/header.php';
+        include 'pages/roadmap.php';
         include 'templates/footer.php';
         break;
 

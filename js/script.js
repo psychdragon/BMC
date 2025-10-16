@@ -34,8 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const ul = document.createElement('ul');
             items.forEach(itemText => {
                 const li = document.createElement('li');
-                li.innerHTML = itemText;
-                li.setAttribute('contenteditable', 'true'); // Make item editable
+                li.innerHTML = itemText; // Use innerHTML to preserve formatting
+                li.setAttribute('contenteditable', 'true');
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'list-actions';
+                actionsDiv.innerHTML = `
+                    <button class="list-action-btn add-item" title="Add item below">+</button>
+                    <button class="list-action-btn remove-item" title="Remove item">-</button>
+                `;
+                li.appendChild(actionsDiv);
                 ul.appendChild(li);
             });
             box.appendChild(ul);
@@ -79,9 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         saveStatus.textContent = 'Saving...';
-        saveButton.disabled = true;
+        showLoader();
 
-        fetch('/api/save.php', {
+        const baseUrl = window.APP_BASE_URL || '/';
+        const apiUrl = `${baseUrl}api/save.php`;
+
+        fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -105,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveStatus.style.color = 'red';
         })
         .finally(() => {
+            hideLoader();
             saveButton.disabled = false;
             setTimeout(() => { saveStatus.textContent = ''; }, 3000);
         });
@@ -127,9 +139,73 @@ document.addEventListener('DOMContentLoaded', () => {
         html2pdf().set(opt).from(element).save();
     };
 
+    const generateSwotButton = document.getElementById('generateSwotBtn');
+
+    // --- SWOT Generation Logic ---
+    const generateSwotAnalysis = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileName = urlParams.get('load');
+        const apiKey = localStorage.getItem('deepSeekApiKey');
+
+        if (!fileName) {
+            alert('Cannot generate SWOT: No file is currently loaded.');
+            return;
+        }
+
+        if (!apiKey) {
+            alert('API Key not found. Please set it in the settings page.');
+            window.location.href = 'settings';
+            return;
+        }
+
+        const statusElement = document.getElementById('saveStatus');
+        statusElement.textContent = 'Generating SWOT Analysis...';
+        statusElement.style.color = 'inherit';
+        showLoader();
+
+        const baseUrl = window.APP_BASE_URL || '/';
+        const apiUrl = `${baseUrl}api/generate_swot.php`;
+
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                bmc_file: fileName,
+                api_key: apiKey
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw new Error(err.message || `HTTP error! status: ${response.status}`); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                statusElement.textContent = 'SWOT Analysis generated successfully!';
+                statusElement.style.color = 'green';
+                // Redirect to the new SWOT page
+                window.location.href = `swot?load=${data.file}`;
+            } else {
+                throw new Error(data.message || 'An unknown error occurred.');
+            }
+        })
+        .catch(error => {
+            console.error('SWOT Generation error:', error);
+            statusElement.textContent = `Error: ${error.message}`;
+            statusElement.style.color = 'red';
+        })
+        .finally(() => {
+            hideLoader();
+            generateSwotButton.disabled = false;
+            setTimeout(() => { statusElement.textContent = ''; }, 5000);
+        });
+    };
+
     if (saveButton) saveButton.addEventListener('click', saveCanvas);
     if (printButton) printButton.addEventListener('click', printCanvas);
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportToPdf);
+    if (generateSwotButton) generateSwotButton.addEventListener('click', generateSwotAnalysis);
 
     // --- Dynamic Loading Logic ---
     const urlParams = new URLSearchParams(window.location.search);
@@ -168,4 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching canvas data:', error);
             canvas.innerHTML = `<p>Error loading Business Model Canvas data from <strong>${dataUrl}</strong>. Please ensure the file exists and is a valid JSON.</p>`;
         });
+
+    // --- Initialize Add/Remove Button Logic ---
+    initializeListActions('.canvas-container');
 });
