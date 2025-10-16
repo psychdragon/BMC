@@ -40,21 +40,25 @@ $roadmapFilePath = '../data/' . $roadmapFile;
 $planFilePath = '../data/' . $planFile;
 
 // --- 3. Read and Consolidate Input Files ---
-if (!file_exists($bmcFilePath) || !file_exists($swotFilePath) || !file_exists($proposalFilePath) || !file_exists($roadmapFilePath)) {
+if (!file_exists($bmcFilePath) || !file_exists($swotFilePath) || !file_exists($proposalFilePath)) {
     http_response_code(404);
-    echo json_encode(['status' => 'error', 'message' => 'Required source documents (BMC, SWOT, Proposal, or Roadmap) not found.']);
+    echo json_encode(['status' => 'error', 'message' => 'Required source documents (BMC, SWOT, or Proposal) not found.']);
     exit;
 }
 
 $bmcData = file_get_contents($bmcFilePath);
 $swotData = file_get_contents($swotFilePath);
 $proposalData = file_get_contents($proposalFilePath);
-$roadmapData = file_get_contents($roadmapFilePath);
 
 $consolidatedData = "Business Model Canvas:\n" . $bmcData .
                     "\n\nSWOT Analysis:\n" . $swotData .
-                    "\n\nProject Proposal:\n" . $proposalData .
-                    "\n\nProject Roadmap:\n" . $roadmapData;
+                    "\n\nProject Proposal:\n" . $proposalData;
+
+// Optionally include the roadmap if it exists
+if (file_exists($roadmapFilePath)) {
+    $roadmapData = file_get_contents($roadmapFilePath);
+    $consolidatedData .= "\n\nProject Roadmap:\n" . $roadmapData;
+}
 
 // --- 4. Prepare the API Request ---
 $apiEndpoint = 'https://api.deepseek.com/chat/completions';
