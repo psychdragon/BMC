@@ -124,9 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (printButton) printButton.addEventListener('click', printSwot);
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportToPdf);
 
-    // --- Dynamic Loading Logic ---
+    // --- Initialize Refine ---
     const urlParams = new URLSearchParams(window.location.search);
     const loadFile = urlParams.get('load');
+    if (loadFile) {
+        const baseName = loadFile.replace('-swot.json', '');
+        initializeRefine('swot', baseName, renderSwot);
+    }
+
+    // --- Dynamic Loading Logic ---
     const baseUrl = window.APP_BASE_URL || '/';
 
     if (loadFile) {
