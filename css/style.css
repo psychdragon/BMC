@@ -935,9 +935,8 @@ li:hover .list-actions {
     }
 
     /* --- Proposal Print Styles --- */
-    .main-nav, .back-link,
-    .canvas-actions, .swot-actions, .proposal-actions, .roadmap-actions, .plan-actions,
-    .refine-container {
+    .proposal-actions, .main-nav, .back-link,
+    .roadmap-actions, .swot-actions {
         display: none !important;
     }
 
