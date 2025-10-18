@@ -44,7 +44,7 @@
 
 - [ ] **Task 18: Implement Project Plan Generator.**
   - Follow the established pattern: System Prompt, Generate API, View/Edit Page, Save API.
-- [ ] **Task 19: Implement WYSIWYG Editor.**
+- [x] **Task 19: Implement WYSIWYG Editor.**
   - Add a button to each document page to open an advanced editor.
   - Implement functionality to export the edited content as a `.docx` file.
 

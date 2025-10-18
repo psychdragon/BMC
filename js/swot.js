@@ -161,4 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initialize Add/Remove Button Logic ---
     initializeListActions('.swot-container');
+
+    // Initialize WYSIWYG Editor
+    initializeWysiwyg({
+        launchBtnId: 'launchEditor',
+        editorContainerId: 'editorContainer',
+        summernoteId: 'summernote',
+        saveBtnId: 'saveEditorContent',
+        exportBtnId: 'exportDocx',
+        exitBtnId: 'exitEditor',
+        contentContainerSelector: '.swot-quadrant-container',
+        actionsContainerSelector: '.swot-actions',
+        titleSelector: '.subtitle',
+        saveFunction: saveSwot
+    });
 });

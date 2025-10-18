@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const proposalContent = document.querySelector('.proposal-content');
     const proposalTitle = document.getElementById('proposalTitle');
     const saveButton = document.getElementById('saveProposalBtn');
     const saveStatus = document.getElementById('saveStatus');
@@ -195,4 +194,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initialize Add/Remove Button Logic ---
     initializeListActions('.proposal-container');
+
+    // Initialize WYSIWYG Editor
+    initializeWysiwyg({
+        launchBtnId: 'launchEditor',
+        editorContainerId: 'editorContainer',
+        summernoteId: 'summernote',
+        saveBtnId: 'saveEditorContent',
+        exportBtnId: 'exportDocx',
+        exitBtnId: 'exitEditor',
+        contentContainerSelector: '.proposal-content',
+        actionsContainerSelector: '.proposal-actions',
+        titleSelector: '#proposalTitle',
+        saveFunction: saveProposal
+    });
 });

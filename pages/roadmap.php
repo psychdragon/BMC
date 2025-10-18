@@ -7,6 +7,7 @@
         <button id="saveRoadmapBtn">💾 Save Changes</button>
         <button id="printRoadmapBtn">🖨️ Print</button>
         <button id="exportRoadmapPdfBtn">📄 Export to PDF</button>
+        <button id="launchEditor" class="btn btn-primary">Launch Editor</button>
         <p id="saveStatus" class="status-message"></p>
     </div>
 
@@ -17,4 +18,5 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<?php include 'templates/wysiwyg.php'; ?>
 <script src="<?php echo $baseUrl; ?>js/roadmap.js"></script>

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const roadmapContent = document.querySelector('.roadmap-content');
     const roadmapTitle = document.getElementById('roadmapTitle');
     const saveButton = document.getElementById('saveRoadmapBtn');
     const saveStatus = document.getElementById('saveStatus');
@@ -156,4 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         roadmapContent.innerHTML = '<p>No roadmap file specified.</p>';
     }
+
+    // Initialize WYSIWYG Editor
+    initializeWysiwyg({
+        launchBtnId: 'launchEditor',
+        editorContainerId: 'editorContainer',
+        summernoteId: 'summernote',
+        saveBtnId: 'saveEditorContent',
+        exportBtnId: 'exportDocx',
+        exitBtnId: 'exitEditor',
+        contentContainerSelector: '.roadmap-content',
+        actionsContainerSelector: '.roadmap-actions',
+        titleSelector: '#roadmapTitle',
+        saveFunction: saveRoadmap
+    });
 });

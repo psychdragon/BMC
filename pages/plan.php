@@ -7,6 +7,7 @@
         <button id="savePlanBtn">💾 Save Changes</button>
         <button id="printPlanBtn">🖨️ Print</button>
         <button id="exportPlanPdfBtn">📄 Export to PDF</button>
+        <button id="launchEditor" class="btn btn-primary">Launch Editor</button>
         <p id="saveStatus" class="status-message"></p>
     </div>
 
@@ -36,4 +37,5 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<?php include 'templates/wysiwyg.php'; ?>
 <script src="<?php echo $baseUrl; ?>js/plan.js"></script>

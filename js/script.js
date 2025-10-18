@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.querySelector('.canvas');
     const subtitle = document.querySelector('.subtitle');
     const saveButton = document.getElementById('saveCanvasBtn');
     const saveStatus = document.getElementById('saveStatus');
@@ -247,4 +246,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initialize Add/Remove Button Logic ---
     initializeListActions('.canvas-container');
+
+    // Initialize WYSIWYG Editor
+    initializeWysiwyg({
+        launchBtnId: 'launchEditor',
+        editorContainerId: 'editorContainer',
+        summernoteId: 'summernote',
+        saveBtnId: 'saveEditorContent',
+        exportBtnId: 'exportDocx',
+        exitBtnId: 'exitEditor',
+        contentContainerSelector: '.canvas',
+        actionsContainerSelector: '.canvas-actions',
+        titleSelector: '.subtitle',
+        saveFunction: saveCanvas
+    });
 });

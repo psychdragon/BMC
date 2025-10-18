@@ -143,4 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('savePlanBtn').addEventListener('click', savePlan);
     document.getElementById('printPlanBtn').addEventListener('click', printPlan);
     document.getElementById('exportPlanPdfBtn').addEventListener('click', exportPlanPdf);
+
+    // Initialize WYSIWYG Editor
+    initializeWysiwyg({
+        launchBtnId: 'launchEditor',
+        editorContainerId: 'editorContainer',
+        summernoteId: 'summernote',
+        saveBtnId: 'saveEditorContent',
+        exportBtnId: 'exportDocx',
+        exitBtnId: 'exitEditor',
+        contentContainerSelector: '#planContent',
+        actionsContainerSelector: '.plan-actions',
+        titleSelector: '#planTitle',
+        saveFunction: savePlan
+    });
 });
