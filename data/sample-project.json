@@ -1,0 +1,68 @@
+{
+  "keyPartners": [
+    "Robot suppliers/manufacturers",
+    "AI software providers",
+    "Legal service providers",
+    "Potential pilot customers",
+    "Industry integrators"
+  ],
+  "keyActivities": [
+    "Market & competitor research",
+    "Service definition & MVP development",
+    "Legal & regulatory compliance",
+    "Robot procurement & testing",
+    "Customer acquisition & pilots",
+    "Feedback collection & refinement",
+    "Marketing & brand building"
+  ],
+  "valuePropositions": [
+    "Convenient access to custom AI-enabled robots for specialized tasks",
+    "Reduced upfront investment via leasing model",
+    "Data-driven improvements with AI analytics for ROI tracking",
+    "Sector-tailored packages (e.g., agri-drones)",
+    "Flexible subscription & per-task pricing options"
+  ],
+  "customerRelationships": [
+    "Pilot program incentives (discounts, Founder's package)",
+    "Dedicated onboarding & training support",
+    "Periodic feedback loops",
+    "Service refinement based on insights",
+    "Case studies & success stories"
+  ],
+  "customerSegments": [
+    "Primary: Agriculture sector (farms)",
+    "Building maintenance companies",
+    "Surveillance/security firms",
+    "Future: Household consumers",
+    "Early Adopters: Firms with high automation pain points"
+  ],
+  "keyResources": [
+    "Seed capital (RM 100k budget)",
+    "Robots & drone hardware",
+    "Foundational tech stack (CRM, website)",
+    "AI platforms & software",
+    "Operational personnel",
+    "Legal consultants"
+  ],
+  "channels": [
+    "Direct sales outreach to target firms",
+    "Website & online booking portal",
+    "Industry trade shows & networking",
+    "Digital marketing (LinkedIn, Google Ads)",
+    "Social media presence"
+  ],
+  "costStructure": [
+    "Legal, registration, insurance: RM 10k",
+    "Robot hardware & spares: RM 40k",
+    "Tech & software subscriptions: RM 15k",
+    "Marketing & pilot discounts: RM 15k",
+    "Operational buffer: RM 20k"
+  ],
+  "revenueStreams": [
+    "Monthly subscription/leasing fees",
+    "Per-task service fees",
+    "Pilot discounts converting to paid contracts",
+    "Extended service portfolio for upselling",
+    "Potential maintenance & support packages"
+  ]
+}
