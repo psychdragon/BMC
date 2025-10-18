@@ -4,7 +4,7 @@ This file provides instructions for AI agents working on this project.
 
 ## Project Overview
 
-This project is a Business Model Canvas (BMC) generator powered by LLMs. The goal is to create a simple system using PHP, JavaScript, CSS, and HTML, where all content is saved as JSON files. This will allow for easy deployment on any standard web server. The system will initially use the DeepSeek API, with plans to expand to other models in the future.
+This project is a Project/business documents generator powered by LLMs. The goal is to create a simple system using PHP, JavaScript, CSS, and HTML, where all content is saved as JSON files. This will allow for easy deployment on any standard web server. The system will initially use the DeepSeek API, with plans to expand to other models in the future.
 
 ## Development Environment
 
