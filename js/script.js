@@ -207,15 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportToPdf);
     if (generateSwotButton) generateSwotButton.addEventListener('click', generateSwotAnalysis);
 
-    // --- Initialize Refine ---
+    // --- Dynamic Loading Logic ---
     const urlParams = new URLSearchParams(window.location.search);
     const loadFile = urlParams.get('load');
-    if (loadFile) {
-        const baseName = loadFile.replace('.json', '').replace(/-swot|-proposal|-roadmap|-plan$/, '');
-        initializeRefine('canvas', baseName, renderCanvas);
-    }
-
-    // --- Dynamic Loading Logic ---
 
     // Use the base URL provided from PHP to construct the correct path
     const baseUrl = window.APP_BASE_URL || '/';

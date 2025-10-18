@@ -166,15 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (printButton) printButton.addEventListener('click', printProposal);
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportProposalPdf);
 
-    // --- Initialize Refine ---
+    // --- Dynamic Loading Logic ---
     const urlParams = new URLSearchParams(window.location.search);
     const loadFile = urlParams.get('load');
-    if (loadFile) {
-        const baseName = loadFile.replace('-proposal.json', '');
-        initializeRefine('proposal', baseName, renderProposal);
-    }
-
-    // --- Dynamic Loading Logic ---
     const baseUrl = window.APP_BASE_URL || '/';
 
     if (loadFile) {

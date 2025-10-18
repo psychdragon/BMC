@@ -130,15 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (printButton) printButton.addEventListener('click', printRoadmap);
     if (exportPdfButton) exportPdfButton.addEventListener('click', exportRoadmapPdf);
 
-    // --- Initialize Refine ---
+    // --- Dynamic Loading Logic ---
     const urlParams = new URLSearchParams(window.location.search);
     const loadFile = urlParams.get('load');
-    if (loadFile) {
-        const baseName = loadFile.replace('-roadmap.json', '');
-        initializeRefine('roadmap', baseName, renderRoadmap);
-    }
-
-    // --- Dynamic Loading Logic ---
     const baseUrl = window.APP_BASE_URL || '/';
 
     if (loadFile) {
