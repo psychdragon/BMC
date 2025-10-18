@@ -22,6 +22,7 @@ This project is a Business Model Canvas (BMC) generator powered by LLMs. The goa
 
 - There are currently no automated tests. Manual testing should be performed after any changes.
 - To test, open the `index.php` file in a web browser and verify that all functionality works as expected.
+- a test server has been setup at http://azwin.my/dev/bmc_test. at every commit, the branch will be deployed on this live test server. 
 
 ## API Usage
 
