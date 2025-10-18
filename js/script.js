@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.querySelector('.canvas');
     const subtitle = document.querySelector('.subtitle');
     const saveButton = document.getElementById('saveCanvasBtn');
     const saveStatus = document.getElementById('saveStatus');
